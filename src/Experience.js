@@ -1,7 +1,11 @@
-import { useFrame } from '@react-three/fiber'
+import { extend, useFrame, useThree } from '@react-three/fiber'
 import { useRef } from 'react'
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+
+extend({ OrbitControls: OrbitControls })
 
 export default function Experience() {
+    const { camera, gl } = useThree()
     const cubeRef = useRef()
     const cubeSphereGroupRef = useRef()
 
@@ -12,19 +16,24 @@ export default function Experience() {
 
     return (
         <>
+            <orbitControls args={[camera, gl.domElement]} />
+
+            <directionalLight position={[1, 2, 3]} intensity={3} />
+            <ambientLight intensity={1} />
+
             <group ref={cubeSphereGroupRef}>
                 <mesh ref={cubeRef} position={[1.5, 0, 0]}>
                     <boxGeometry />
-                    <meshBasicMaterial color='mediumpurple' />
+                    <meshStandardMaterial color='mediumpurple' />
                 </mesh>
                 <mesh position={[-1.5, 0, 0]}>
                     <sphereGeometry />
-                    <meshBasicMaterial color='orange' />
+                    <meshStandardMaterial color='orange' />
                 </mesh>
             </group>
             <mesh position-y={-1} rotation-x={-Math.PI * 0.5} scale={10}>
                 <planeGeometry />
-                <meshBasicMaterial color='greenyellow' />
+                <meshStandardMaterial color='greenyellow' />
             </mesh>
         </>
     )
