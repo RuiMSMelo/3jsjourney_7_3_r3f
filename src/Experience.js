@@ -13,6 +13,11 @@ export default function Experience() {
     useFrame((state, delta) => {
         cubeRef.current.rotation.y += delta
         // cubeSphereGroupRef.current.rotation.y += delta
+
+        // const angle = state.clock.elapsedTime * 0.5
+        // state.camera.position.x = Math.sin(angle) * 8
+        // state.camera.position.z = Math.cos(angle) * 8
+        // state.camera.lookAt(0, 0, 0)
     })
 
     return (
@@ -29,7 +34,7 @@ export default function Experience() {
                 </mesh>
                 <mesh position={[-1.5, 0, 0]}>
                     <sphereGeometry />
-                    <meshStandardMaterial color='orange' />
+                    <meshStandardMaterial wireframe={true} color='orange' />
                 </mesh>
             </group>
             <mesh position-y={-1} rotation-x={-Math.PI * 0.5} scale={10}>
